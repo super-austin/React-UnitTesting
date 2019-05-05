@@ -27,6 +27,6 @@ describe('<Form /> rendering', () => {
         // The first argument of the first call to the function was url
         expect(axios.get.mock.calls[0][0]).toBe(url);  
         // validate data returned by mock resolve promise
-        return axios.get.mock.results[0].value.then(resp => expect(resp.data).toEqual(resp.data))
+        return axios.get.mock.results[0].value.then(response => expect(response.data).toEqual(resp.data))
     });
 });
