@@ -15,15 +15,17 @@ describe('<Form /> rendering', () => {
         const url = `https://jsonplaceholder.typicode.com/users/${id}`
         const resp = {data: {name:"from mock"}};
         axios.get.mockImplementation(() => Promise.resolve(resp))
-
+        //console.log(wrapper.debug())
         wrapper.find('#cid').simulate('change', {target: { value: `${id}` }})
         wrapper.find('#formButtonAdd').simulate('click')
-
         // number of times axios.get was called
         expect(axios.get).toHaveBeenCalledTimes(1)
         // passed argument
         expect(axios.get).toHaveBeenCalledWith(url)
         // The first argument of the first call to the function was url
-        expect(axios.get.mock.calls[0][0]).toBe(url);      
+        expect(axios.get.mock.calls[0][0]).toBe(url);  
+        // validate data returned by mock
+        return axios.get.mock.results[0].value.then(resp => expect(resp.data).toEqual(resp.data))
+           
     });
 });
