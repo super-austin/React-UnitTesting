@@ -1,4 +1,4 @@
-import Form from '../src/components/Form';
+import Form from '../../src/components/Form';
 
 import axios from 'axios';
 jest.mock('axios');
@@ -9,13 +9,19 @@ beforeEach(() => {
     wrapper = shallow(<Form />);
 });
 
-describe('<Form /> rendering', () => {
+describe('<Form /> rendering and making API call', () => {
     it('should fetch user f. name and l. name', () => {
         const id = 5;
         const url = `https://jsonplaceholder.typicode.com/users/${id}`
         const mockName = 'from mock'
-        const resp = {data: {name:mockName}};
+        const resp = {
+            data: {
+                name:mockName
+            }
+        };
         axios.get.mockImplementation(() => Promise.resolve(resp))
+        // or
+        //axios.get.mockResolvedValue(resp);
         wrapper.find('#cid').simulate('change', {target: { value: `${id}` }})
         wrapper.find('#formButtonAdd').simulate('click')
         wrapper.setState({clientName:mockName})

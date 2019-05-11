@@ -1,4 +1,4 @@
-import Form from '../src/components/Form';
+import Form from '../../src/components/Form';
 
 let wrapper;
 

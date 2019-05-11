@@ -9,18 +9,22 @@ class Form extends Component {
             clientId: '',
             clientName:''
         };
-        this.getClientName = this.getClientName.bind(this);
-        this.makeApiCall = this.makeApiCall.bind(this);
     }
 
     getClientName(event) {
         this.setState({ clientId: event.target.value });
     }
     
-    async makeApiCall () {
+    // axios full code
+    makeApiCall = async () => {
         const id = this.state.clientId;
-        const clientName = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.data.name);
-        this.setState({ clientName });
+        try {
+            let result = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+            let data  = await result.data;
+            this.setState({ clientName: data.name });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     render() {
@@ -31,10 +35,10 @@ class Form extends Component {
                     <label className='form-label'>
                         customer id:
                     </label>
-                    <input type="text" id="cid" className='form-input' value={this.state.clientId} onChange={this.getClientName}/>
+                    <input type="text" id="cid" className='form-input' value={this.state.clientId} onChange={(e) => this.getClientName(e)}/>
                 </fieldset>
                 <div className='form-group'>
-                    <button id='formButtonAdd' className='btn' type="button" onClick={this.makeApiCall}>Search</button>
+                    <button id='formButtonAdd' className='btn' type="button" onClick={() => this.makeApiCall()}>Search</button>
                 </div>
             </form>
         );
