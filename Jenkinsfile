@@ -12,21 +12,5 @@ pipeline {
         }
       }
     }
-    stage('Run tests') {
-      steps {
-        step{
-          sh 'npm install'
-          sh 'npm test'          
-        }
-
-      }
-    } 
-    stage('Clean up') {
-      steps{
-        steps {
-          sh 'ls -lA'
-        }        
-      }
-    } 
   }
 }
