@@ -1,26 +1,22 @@
 pipeline {
-  agent any
-    
-  tools {nodejs "node"}
-    
-  stages {
-        
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/nikola-bodrozic/react-jest-enzyme'
-      }
-    }
-        
-    stage('Install dependencies') {
-      steps {
-        sh 'npm install'
-      }
-    }
-     
-    stage('Test') {
-      steps {
-         sh 'npm test'
-      }
-    }      
-  }
+    agent any
+
+    stages {
+        stage ('Compile Stage') {
+
+            steps {
+                withNode(node : 'nodejs_10_16_1') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(node : 'nodejs_10_16_1') {
+                    sh 'npm test'
+                }
+            }
+        }
 }
