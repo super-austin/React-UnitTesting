@@ -18,6 +18,7 @@ pipeline {
         sh 'npm test'
       }
     } 
+
     stage('Clean up') {
       steps {
         sh 'ls -lA'
