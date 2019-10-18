@@ -6,11 +6,13 @@ pipeline {
 
             steps {
                 withNode(node : 'nodejs_10_16_1') {
+                	sh 'whoami'
+                	sh 'ls -lA'
                     sh 'npm install'
                 }
             }
         }
-
+	}
         stage ('Testing Stage') {
 
             steps {
