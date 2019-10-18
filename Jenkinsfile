@@ -14,14 +14,18 @@ pipeline {
     }
     stage('Run tests') {
       steps {
-        sh 'npm install'
-        sh 'npm test'
+        step{
+          sh 'npm install'
+          sh 'npm test'          
+        }
+
       }
     } 
-
     stage('Clean up') {
-      steps {
-        sh 'ls -lA'
+      steps{
+        steps {
+          sh 'ls -lA'
+        }        
       }
     } 
   }
