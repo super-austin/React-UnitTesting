@@ -9,19 +9,7 @@ pipeline {
       steps {
       	sh 'whoami'
       	sh 'ls -lA'
-        sh 'npm install'
-      }
-    }
-     
-    stage('Test') {
-      steps {
-         sh 'npm test'
-      }
-    }   
-
-    stage('Clean up') {
-      steps {
-         sh 'rm -rf node_modules/'
+        sh 'npm -v'
       }
     }
   }
