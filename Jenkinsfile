@@ -2,28 +2,26 @@ pipeline {
   agent any
 
   stages {
-    stage('Build') {
+    stage('Install dep.') {
       steps {
-          echo 'Building..'
-      }
-    }
-
-    stage('Test') {
-      steps {
-        dir('core') {
+        step {
           nodejs(nodeJSInstallationName: 'node10') {
-            sh 'ls -l'
             sh 'node -v'
             sh 'npm -v'
           }
         }
       }
     }
-
-    stage('Deploy') {
+    stage('Run tests') {
       steps {
-          echo 'Deploying....'
+        sh 'npm install'
+        sh 'npm test'
       }
-    }
+    } 
+    stage('Clean up') {
+      steps {
+        sh 'ls -lA'
+      }
+    } 
   }
 }
