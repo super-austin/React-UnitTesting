@@ -16,7 +16,7 @@ pipeline {
 
     stage('Clean up') {
       steps {
-        sh 'ls node_modules'
+        sh 'rm -rf node_modules'
       }
     }
   }
