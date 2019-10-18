@@ -8,14 +8,15 @@ pipeline {
             sh 'ls -l'
             sh 'node -v'
             sh 'npm -v'
+            sh 'npm install'
+            sh 'npm test'
         }
       }
     }
 
-    stage('Run tests') {
+    stage('Clean up') {
       steps {
-          sh 'npm install'
-          sh 'npm test'
+        sh 'ls node_modules'
       }
     }
   }
