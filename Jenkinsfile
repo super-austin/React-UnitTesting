@@ -6,18 +6,13 @@ pipeline {
   stages {    
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/xxxx'
+        git 'https://github.com/nikola-bodrozic/react-jest-enzyme'
       }
     }        
     stage('Install dependencies') {
       steps {
-        sh 'npm i -save express'
+        sh 'npm -v'
       }
-    }     
-    stage('Test') {
-      steps {
-         sh 'node server.js'
-      }
-    }             
+    }           
   }
 }
