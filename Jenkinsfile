@@ -3,16 +3,18 @@ pipeline {
 
   tools {nodejs "node10"}  
 
-  stage('Install dependencies') {
-
-    steps {
-        sh 'npm -v'
-      }
-    }     
-
-    stage('Test') {
+  stages{
+    stage('Dep.'){
       steps {
-         sh 'npm -v'
-      }
-    }             
+        sh 'npm -v'
+      }  
+    }
+    stage('Dep2.'){
+      steps {
+        sh 'ls -l'
+        sh 'npm -v'
+      }  
+    }
+  }
 }
+    
