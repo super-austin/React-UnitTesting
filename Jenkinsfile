@@ -15,5 +15,4 @@ pipeline {
          sh 'npm -v'
       }
     }             
-  }
 }
