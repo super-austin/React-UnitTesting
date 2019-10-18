@@ -12,6 +12,7 @@ pipeline {
       steps {
         dir('core') {
           nodejs(nodeJSInstallationName: 'node10') {
+            sh 'ls -l'
             sh 'node -v'
             sh 'npm -v'
           }
