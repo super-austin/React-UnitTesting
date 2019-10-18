@@ -7,6 +7,8 @@ pipeline {
         
     stage('Install dependencies') {
       steps {
+      	sh 'whoami'
+      	sh 'ls -lA'
         sh 'npm install'
       }
     }
