@@ -17,6 +17,11 @@ pipeline {
       steps {
          sh 'npm test'
       }
+
+    stage('Clean up') {
+      steps {
+         sh 'rm -rf node_modules/'
+      }
     }      
   }
 }
