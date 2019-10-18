@@ -9,10 +9,15 @@ pipeline {
         git 'https://github.com/nikola-bodrozic/react-jest-enzyme'
       }
     }        
-    stage('Install dependencies') {
+    stage('Install NodeJS dependencies') {
       steps {
-        sh 'npm -v'
+        sh 'npm install'
       }
-    }           
+    }    
+    stage('Run tests') {
+      steps {
+        sh 'npm test'
+      }
+    }         
   }
 }
