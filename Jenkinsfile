@@ -4,15 +4,20 @@ pipeline {
   tools {nodejs "node10"}  
 
   stages{
-    stage('Dep.'){
+    stage('Install deps.'){
       steps {
         sh 'npm -v'
+        sh 'npm install'
       }  
     }
-    stage('Dep2.'){
+    stage('Jest tests'){
       steps {
-        sh 'ls -l'
-        sh 'npm -v'
+        sh 'npm test'
+      }  
+    }
+    stage('Clean up'){
+      steps {
+        sh 'rm -rf node_modules'
       }  
     }
   }
