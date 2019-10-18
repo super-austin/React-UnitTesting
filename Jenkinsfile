@@ -11,7 +11,8 @@ pipeline {
     stage('Test') {
       steps {
         dir('core') {
-          nodejs(nodeJSInstallationName: 'Node-9.11.1') {
+          nodejs(nodeJSInstallationName: 'node10') {
+            sh 'cat Jenkinsfile'
             sh 'npm -v'
           }
         }
