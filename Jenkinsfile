@@ -1,13 +1,23 @@
 pipeline {
   agent any
-  stages {
+
+  tools {nodejs "node"}
+
+  stages {    
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/xxxx'
+      }
+    }        
     stage('Install dependencies') {
       steps {
-      	sh 'whoami'
-      	sh 'ls -lA'
-        sh 'apk update && apk add nodejs'
-        sh 'npm -v'
+        sh 'npm i -save express'
       }
-    }
+    }     
+    stage('Test') {
+      steps {
+         sh 'node server.js'
+      }
+    }             
   }
 }
