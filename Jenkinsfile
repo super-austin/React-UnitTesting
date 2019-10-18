@@ -12,7 +12,7 @@ pipeline {
       steps {
         dir('core') {
           nodejs(nodeJSInstallationName: 'node10') {
-            sh 'cat Jenkinsfile'
+            sh 'ls -l'
             sh 'npm -v'
           }
         }
