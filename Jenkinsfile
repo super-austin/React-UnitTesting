@@ -2,13 +2,7 @@ pipeline {
   agent any
 
   stages {
-    stage('Build') {
-      steps {
-          sh 'ls -l'
-      }
-    }
-
-    stage('Test') {
+    stage('Check versions') {
       steps {
           nodejs(nodeJSInstallationName: 'node10') {
             sh 'ls -l'
@@ -18,9 +12,10 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Run tests') {
       steps {
-          echo 'Deploying....'
+          sh 'npm install'
+          sh 'npm test'
       }
     }
   }
