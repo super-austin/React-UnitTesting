@@ -18,8 +18,6 @@ open <http://localhost:3000>
 
 ## Jenkins CI
 
-- bring up Jenkins server with `docker-compose up -d`
+- Bring up Jenkins server with `docker-compose up -d`
 - Create pipeline using option `pipeline from SCM` use `https://github.com/nikola-bodrozic/react-jest-enzyme` as repo URL
-- Make sure that NodeJS plugin is installed and set like on image
-
-![NodeJS](src/img/img.png)
+- Run build
