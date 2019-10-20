@@ -6,16 +6,10 @@ pipeline {
 		}
 	}
 
-  stage('Install dependencies') {
-
-  steps {
-      sh 'node -v'
-    }
-  }     
-
-  stage('Test') {
-    steps {
-       sh 'npm -v'
-    }
-  }             
+  stages {     
+	  stage('Test') {
+	    steps {
+	       sh 'node -v'
+	    }
+	  }             
 }
