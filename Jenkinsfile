@@ -1,25 +1,31 @@
 pipeline {
-  agent any
-
-  tools {nodejs "node10"}  
-
-  stages{
-    stage('Install deps.'){
-      steps {
-        sh 'npm -v'
-        sh 'npm install'
-      }  
+    agent {
+        docker {
+            image 'node:10-alpine'
+            args '-p 3000:3000'
+        }
     }
-    stage('Jest tests'){
-      steps {
-        sh 'npm test'
-      }  
+    environment {
+        CI = 'true' 
     }
-    stage('Clean up'){
-      steps {
-        sh 'rm -rf node_modules'
-      }  
+    stages {
+        stage('Install node') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        stage('Jest tests'){
+          steps {
+            sh 'npm test'
+          }  
+        }
+        stage('Clean up'){
+          steps {
+            sh 'rm -rf node_modules'
+          }  
+        }
     }
-  }
+}
+    
 }
     
