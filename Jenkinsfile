@@ -5,7 +5,6 @@ pipeline {
 			args '-p 3000:3000'
 		}
 	}
-
   stages {     
 	  stage('Build') {
 	    steps {
@@ -17,5 +16,13 @@ pipeline {
 	       sh 'npm test'
 	    }
 	  }           
+	}
+	post { 
+		always { 
+			sh 'rm -rf node_modules'
+		}
+	  failure {
+	     echo 'send email about broken build'
+	  }
 	}
 }
