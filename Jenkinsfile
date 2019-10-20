@@ -14,18 +14,11 @@ pipeline {
                 sh 'node -v'
                 sh 'npm -v'
             }
+        }
         stage('Jest tests'){
           steps {
             sh 'npm test'
           }  
         }
-        stage('Clean up'){
-          steps {
-            sh 'rm -rf node_modules'
-          }  
-        }
     }
 }
-    
-}
-    
