@@ -19,7 +19,7 @@ pipeline {
 	}
 	post { 
 		success {
-			echo 'build passed'
+			echo 'create prod. build'
 		}
 		always { 
 			sh 'rm -rf node_modules'
