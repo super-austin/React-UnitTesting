@@ -18,6 +18,9 @@ pipeline {
 	  }           
 	}
 	post { 
+		success {
+			echo 'build passed'
+		}
 		always { 
 			sh 'rm -rf node_modules'
 		}
