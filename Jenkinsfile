@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:10-alpine'
+            image 'node:6-alpine'
             args '-p 3000:3000'
         }
     }
@@ -9,16 +9,17 @@ pipeline {
         CI = 'true' 
     }
     stages {
-        stage('Install node') {
+        stage('Build') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
+            	sh 'node -v'
+            	sh 'npm -v'
+                sh 'npm install'
             }
         }
-        stage('Jest tests'){
-          steps {
-            sh 'npm test'
-          }  
+        stage('Test') { 
+            steps {
+                sh 'npm test' 
+            }
         }
     }
 }
