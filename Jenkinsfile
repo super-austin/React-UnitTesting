@@ -11,6 +11,11 @@ pipeline {
 	    steps {
 	       sh 'node -v'
 	    }
-	  }             
+	  }    
+	  stage('Test2') {
+	    steps {
+	       sh 'npm -v'
+	    }
+	  }           
 	}
 }
