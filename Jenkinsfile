@@ -28,7 +28,10 @@ pipeline {
                 docker { image REACT_IMAGE }
             }
 
-
+            steps {
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo '--- Starting lint ---'
+            }
         }
 
         stage('Build Image') {
