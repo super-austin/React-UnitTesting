@@ -44,10 +44,6 @@ pipeline {
         }
 
         stage('Develop') {
-            when {
-                branch 'master'
-            }
-
             stages {
                 stage('Publish Image') {
                     steps {
