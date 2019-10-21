@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
-        DOCKER_REGISTRY = 'index.docker.io/v1'
+        DOCKER_REGISTRY = 'index.docker.io'
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/"
         DOCKER_HUB_USER = 'ce3d51cb45a2'
         PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_HUB_USER}/reactapp"
@@ -24,16 +24,6 @@ pipeline {
             }
         }
 
-        stage('Lint') {
-            agent {
-                docker { image REACT_IMAGE }
-            }
-
-            steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                echo '--- lint placeholder ---'
-            }
-        }
 
         stage('Build Image') {
             steps {
