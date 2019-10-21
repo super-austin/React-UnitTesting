@@ -1,5 +1,5 @@
 # base image
-FROM node:node:10-alpine
+FROM node:10-alpine
 
 # set working directory
 WORKDIR /app
