@@ -5,7 +5,7 @@ pipeline {
         DOCKER_REGISTRY_CREDENTIALS = 'docker hub'
         DOCKER_REGISTRY = 'index.docker.io'
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/"
-        PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/reactapp"
+        PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/react-app"
 
         REACT_IMAGE = "node:8-alpine"
 
