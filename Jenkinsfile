@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
+        DOCKER_REGISTRY_CREDENTIALS = 'docker hub'
         DOCKER_REGISTRY = 'index.docker.io'
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/"
-        PROJECT_IMAGE = "${DOCKER_REGISTRY}/reactapp"
+        PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/reactapp"
 
         REACT_IMAGE = "node:8-alpine"
 
