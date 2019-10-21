@@ -23,23 +23,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
-          agent {
-            docker { image REACT_IMAGE}
-          }
-          steps {
-             sh 'npm install'
-          }
-        }    
-
-        stage('Test') {
-          agent {
-            docker { image REACT_IMAGE}
-          }
-          steps {
-             sh 'npm test'
-          }
-        }            
+       
   
         stage('Build Image') {
             steps {
