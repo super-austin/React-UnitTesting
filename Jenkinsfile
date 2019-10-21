@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
         DOCKER_REGISTRY = 'index.docker.io'
-        DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
+        DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
         PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/react-app"
 
         REACT_IMAGE = "node:8-alpine"
