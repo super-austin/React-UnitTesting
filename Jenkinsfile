@@ -21,9 +21,17 @@ pipeline {
                     GIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
             }
-        }
+        } 
 
-       
+        stage('Test') {
+          agent {
+            docker { image REACT_IMAGE}
+          }
+          steps {
+            sh 'npm install'
+            sh 'npm test'
+          }
+        }            
   
         stage('Build Image') {
             steps {
