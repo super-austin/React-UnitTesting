@@ -48,8 +48,8 @@ pipeline {
                 stage('Publish Image') {
                     steps {
                         echo '--- Publishing image ---'
-                        withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL]) {
-                            sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
+                        withDockerRegistry(credentialsId: '6cf4cdbf-2269-41d7-a195-dae4078ec69e', url: 'https://index.docker.io/v1/') {
+                          sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
                         }
                     }
                 }
