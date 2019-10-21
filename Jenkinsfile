@@ -22,7 +22,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Build') {
+          steps {
+             sh 'yarn -v'
+          }
+        }    
+        stage('Test') {
+          steps {
+             sh 'yarn -v'
+          }
+        }     
         stage('Build Image') {
             steps {
                 echo '--- Building image ---'
