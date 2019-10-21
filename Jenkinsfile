@@ -7,7 +7,7 @@ pipeline {
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
         PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/react-app"
 
-        REACT_IMAGE = "jonbaldie/yarn"
+        REACT_IMAGE = "node:10-alpine"
 
         GIT_HASH = ''
 
@@ -22,16 +22,19 @@ pipeline {
                 }
             }
         }
+
         stage('Build') {
           steps {
-             sh 'yarn -v'
+             sh 'npm install'
           }
         }    
+        
         stage('Test') {
           steps {
-             sh 'yarn -v'
+             sh 'npm test'
           }
-        }     
+        }           
+  
         stage('Build Image') {
             steps {
                 echo '--- Building image ---'

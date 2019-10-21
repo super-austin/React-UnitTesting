@@ -1,5 +1,5 @@
 # base image
-FROM jonbaldie/yarn
+FROM node:node:10-alpine
 
 # set working directory
 WORKDIR /app
@@ -9,8 +9,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY package.json /app/package.json
-#RUN npm install --silent
+RUN npm install --silent
 COPY . /app
 
 # start app
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
