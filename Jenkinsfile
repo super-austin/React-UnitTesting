@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
+        DOCKER_REGISTRY_CREDENTIALS = 'docker hub'
         DOCKER_REGISTRY = 'index.docker.io'
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1"
         PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/react-app"
@@ -37,7 +37,7 @@ pipeline {
                 stage('Publish Image') {
                     steps {
                         echo '--- Publishing image ---'
-                        withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL) {
+                        withDockerRegistry(credentialsId: '6cf4cdbf-2269-41d7-a195-dae4078ec69e', url: 'https://index.docker.io/v1/') {
                           sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
                         }
                     }
