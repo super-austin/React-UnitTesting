@@ -8,7 +8,7 @@ pipeline {
         DOCKER_HUB_USER = 'ce3d51cb45a2'
         PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_HUB_USER}/reactapp"
 
-        REACT_IMAGE = "node:8-alpine"
+        REACT_IMAGE = "node:10-alpine"
 
         GIT_HASH = ''
 
