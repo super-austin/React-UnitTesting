@@ -8,7 +8,7 @@ pipeline {
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    REACT_IMAGE = "node:8"
+    REACT_IMAGE = "mhart/alpine-node:12"
 
     GIT_HASH = ''
   }
