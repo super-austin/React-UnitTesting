@@ -3,11 +3,12 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
+        DOCKER_REGISTRY_USERNAME = 'ce3d51cb45a2'
         DOCKER_REGISTRY = 'index.docker.io'
         DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
-        PROJECT_IMAGE = "${DOCKER_REGISTRY}/ce3d51cb45a2/react-app"
+        PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-        REACT_IMAGE = "node:10-alpine"
+        REACT_IMAGE = "node:8"
 
         GIT_HASH = ''
 
@@ -25,34 +26,34 @@ pipeline {
 
         stage('Test') {
           agent {
-            docker { image REACT_IMAGE}
+            docker { image REACT_IMAGE }
           }
           steps {
-            sh 'npm install'
-            sh 'npm test'
+            sh 'yarn'
+            sh 'yarn test'
           }
         }            
   
         stage('Build Image') {
-            steps {
-                echo '--- Building image ---'
-                sh """
-                docker build -t ${PROJECT_IMAGE}:${GIT_HASH} .
-                """
-            }
+          steps {
+            echo '--- Building image ---'
+            sh """
+            docker build -t ${PROJECT_IMAGE}:${GIT_HASH} .
+            """
+          }
         }
 
-        stage('Develop') {
-            stages {
-                stage('Publish Image') {
-                    steps {
-                        echo '--- Publishing image ---'
-                        withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL ) {
-                          sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
-                        }
-                    }
+        stage('Push Image') {
+          stages {
+            stage('Publish Image') {
+              steps {
+                echo '--- Publishing image ---'
+                withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL ) {
+                  sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
+                }
                 }
             }
+          }
         }
     }
 }
