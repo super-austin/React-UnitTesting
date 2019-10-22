@@ -2,13 +2,13 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_REGISTRY_CREDENTIALS = '6cf4cdbf-2269-41d7-a195-dae4078ec69e'
+    DOCKER_REGISTRY_CREDENTIALS = '454bff7d-1a8b-4e41-9812-2614890ca14f'
     DOCKER_REGISTRY_USERNAME = 'ce3d51cb45a2'
     DOCKER_REGISTRY = 'index.docker.io'
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    REACT_IMAGE = "node:10-alpine"
+    REACT_IMAGE = "node:10"
 
     GIT_HASH = ''
   }
@@ -28,8 +28,8 @@ pipeline {
         docker { image REACT_IMAGE }
       }
       steps {
-        sh 'npm install'
-        sh 'npm test'
+        sh 'yarn'
+        sh 'yarn test'
       }
     }            
 

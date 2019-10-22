@@ -1,8 +1,9 @@
-FROM node:10-alpine as build-deps
+FROM node:10 as build-deps
 WORKDIR /usr/src/app
-COPY package.json ./
-RUN npm install
-COPY . ./
+COPY package.json .
+RUN yarn
+COPY . .
+RUN yarn build
 
 # Stage 2 - the production environment
 FROM nginx:1.12-alpine
