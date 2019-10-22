@@ -8,24 +8,24 @@ pipeline {
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    REACT_IMAGE = "node:10"
+    APP_IMAGE = "node:10"
 
-    GIT_HASH = ''
+    GIT_COMMIT = ''
   }
 
   stages {
     stage('Preparation') {
       steps {
-        echo "--- Initialize variables ---"
+        echo "--- Get latest git commit ---"
         script {
-            GIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+            GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
       }
     } 
 
     stage('Test') {
       agent {
-        docker { image REACT_IMAGE }
+        docker { image APP_IMAGE }
       }
       steps {
         sh 'yarn'
@@ -36,9 +36,7 @@ pipeline {
     stage('Build Image') {
       steps {
         echo '--- Building image ---'
-        sh """
-        docker build -t ${PROJECT_IMAGE}:${GIT_HASH} .
-        """
+        sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
       }
     }
 
@@ -48,7 +46,7 @@ pipeline {
           steps {
             echo '--- Publishing image ---'
             withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL ) {
-              sh "docker push ${PROJECT_IMAGE}:${GIT_HASH}"
+              sh "docker push ${PROJECT_IMAGE}:${GIT_COMMIT}"
             }
           }
         }
