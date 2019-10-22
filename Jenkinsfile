@@ -8,7 +8,7 @@ pipeline {
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    REACT_IMAGE = "mhart/alpine-node:12"
+    REACT_IMAGE = "node:10-alpine"
 
     GIT_HASH = ''
   }
@@ -28,8 +28,8 @@ pipeline {
         docker { image REACT_IMAGE }
       }
       steps {
-        sh 'yarn'
-        sh 'yarn test'
+        sh 'npm install'
+        sh 'npm test'
       }
     }            
 
