@@ -17,7 +17,7 @@ pipeline {
     stage('Preparation') {
       steps {
         echo "--- Get latest git commit ---"
-        echo "whoami"
+        sh "whoami"
         script {
             GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
