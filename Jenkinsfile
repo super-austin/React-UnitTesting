@@ -18,6 +18,7 @@ pipeline {
       steps {
         sh "whoami"
         sh "echo $PATH"
+        sh "curl -sSL https://get.docker.com/ | sh"
         echo "--- Get latest git commit ---"
         script {
             GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
