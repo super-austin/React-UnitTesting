@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_REGISTRY_CREDENTIALS = '454bff7d-1a8b-4e41-9812-2614890ca14f'
+    DOCKER_REGISTRY_CREDENTIALS = '700103be-188b-4f0b-a4f2-722130fb30b1'
     DOCKER_REGISTRY_USERNAME = 'ce3d51cb45a2'
     DOCKER_REGISTRY = 'index.docker.io'
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
