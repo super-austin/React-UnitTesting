@@ -17,39 +17,17 @@ pipeline {
     stage('Preparation') {
       steps {
         echo "--- Get latest git commit ---"
+        echo "whoami"
         script {
             GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
       }
-    } 
-
-    stage('Test') {
-      agent {
-        docker { image APP_IMAGE }
-      }
-      steps {
-        sh 'yarn'
-        sh 'yarn test'
-      }
-    }            
+    }      
 
     stage('Build Image') {
       steps {
         echo '--- Building image ---'
         sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
-      }
-    }
-
-    stage('Push Image') {
-      stages {
-        stage('Publish Image') {
-          steps {
-            echo '--- Publishing image ---'
-            withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL ) {
-              sh "docker push ${PROJECT_IMAGE}:${GIT_COMMIT}"
-            }
-          }
-        }
       }
     }
   }
