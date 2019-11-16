@@ -22,13 +22,6 @@ pipeline {
             GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
       }
-    }      
-
-    stage('Build Image') {
-      steps {
-        echo '--- Building image ---'
-        sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
-      }
     }
   }
 }
