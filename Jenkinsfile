@@ -18,6 +18,7 @@ pipeline {
       steps {
         echo "--- Get latest git commit ---"
         sh "whoami"
+        sh "echo $PATH"
         script {
             GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
