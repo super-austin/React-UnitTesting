@@ -60,7 +60,7 @@ pipeline {
  
  post {
   success {
-   echo 'create prod. build'
+   echo 'prod. build created'
   }
   always {
    sh 'rm -rf node_modules'
