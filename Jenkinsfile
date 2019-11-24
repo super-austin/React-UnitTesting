@@ -60,9 +60,10 @@ pipeline {
  
  post {
   success {
-   echo 'prod. image pushed'
+   echo 'image is created and pushed'
   }
   always {
+   sh 'rm -rf node_modules'
    cleanWs()
   }
   failure {
