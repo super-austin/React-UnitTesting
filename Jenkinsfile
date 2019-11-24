@@ -16,8 +16,6 @@ pipeline {
  stages {
   stage('Preparation') {
    steps {
-    sh "whoami"
-    sh "echo $PATH"
     echo "--- Get latest git commit ---"
     script {
      GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
@@ -63,8 +61,7 @@ pipeline {
    echo 'image is created and pushed'
   }
   always {
-   sh 'rm -rf node_modules'
-   cleanWs()
+    cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, deleteDirs: true)
   }
   failure {
    echo 'send email about broken build'
