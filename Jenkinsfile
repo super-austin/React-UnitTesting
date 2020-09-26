@@ -10,10 +10,21 @@ pipeline {
 
   APP_IMAGE = "node:10"
 
-  GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+  GIT_COMMIT = ' '
  }
 
  stages {
+  stage('Preparation') {
+   steps {
+    sh "whoami"
+    sh "echo $PATH"
+    echo "--- Get latest git commit ---"
+    script {
+     GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+    }
+   }
+  }
+
   stage('Test') {
    agent {
     docker {
@@ -21,6 +32,8 @@ pipeline {
     }
    }
    steps {
+    sh 'ls -l' 
+    sh 'pwd' 
     sh 'yarn'
     sh 'CI=true yarn test'
    }
@@ -29,6 +42,8 @@ pipeline {
   stage('Build Image') {
    steps {
     echo '--- Building image ---'
+    sh 'ls -l'
+    sh 'pwd' 
     sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
    }
   }
@@ -52,7 +67,8 @@ pipeline {
    echo 'image is created and pushed'
   }
   always {
-    cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, deleteDirs: true)
+   sh 'rm -rf node_modules'
+   cleanWs()
   }
   failure {
    echo 'send email about broken build'
