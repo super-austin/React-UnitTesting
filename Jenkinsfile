@@ -10,19 +10,10 @@ pipeline {
 
   APP_IMAGE = "node:10"
 
-  GIT_COMMIT = ''
+  GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
  }
 
  stages {
-  stage('Preparation') {
-   steps {
-    echo "--- Get latest git commit ---"
-    script {
-     GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-    }
-   }
-  }
-
   stage('Test') {
    agent {
     docker {

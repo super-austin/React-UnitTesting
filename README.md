@@ -5,17 +5,13 @@ This project shows how to:
 - create a prod. image
 - push it to remote docker image repo
 
-## Plugins
-
-List of Jenkins plugins is in `ci-cd/plugins.txt`.
-
 ## Jenkins Setup
 
-`cd ci-cd/`
+``
+docker run --rm -u root -p 8080:8080 -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home jenkinsci/blueocean
+``
 
-`docker build -t jenkins .`
-
-`docker run jenkins`
+login to Jenkins at <http://localhost:8080>
 
 ## Credentials
 
