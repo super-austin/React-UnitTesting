@@ -11,7 +11,11 @@ List of Jenkins plugins is in `ci-cd/plugins.txt`.
 
 ## Jenkins Setup
 
-Bring up Jenkins server with `docker-compose up -d` using docker-compose.yaml from this repo
+`cd ci-cd/`
+
+`docker build -t jenkins .`
+
+`docker run jenkins`
 
 ## Credentials
 
