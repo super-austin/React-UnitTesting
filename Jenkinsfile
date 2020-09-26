@@ -68,7 +68,6 @@ pipeline {
   }
   always {
    sh 'rm -rf node_modules'
-   cleanWs()
   }
   failure {
    echo 'send email about broken build'
