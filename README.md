@@ -8,15 +8,17 @@ This project shows how to:
 ## Jenkins Setup
 
 ``
-docker run --rm -u root -p 8080:8080 -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home jenkinsci/blueocean
+docker run --rm -u root -p 8080:8080 \
+    -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "$HOME":/home jenkinsci/blueocean
 ``
 
 login to Jenkins at <http://localhost:8080>
 
 ## Credentials
 
-- Add your Docker Hub credentials to Jenkins on page http://localhost:8080/credentials/store/system/
-- in Jenkinsfile in line 5 add credentials ID, and username for docker hub in line 6
+- Add your Docker Hub credentials to Jenkins on page http://localhost:8080/credentials/store/system/ using id: `fd2-84f3-afc9a8a831fd`
 
 ## Pipeline
 
