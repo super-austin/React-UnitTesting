@@ -60,7 +60,6 @@ blueocean-display-url:2.3.0
 workflow-job:2.36
 pipeline-input-step:2.11
 workflow-scm-step:2.9
-jira:3.0.10
 blueocean:1.21.0
 git-server:1.8
 jenkins-design-language:1.21.0
@@ -71,7 +70,6 @@ docker-plugin:1.1.8
 pubsub-light:1.13
 jquery-detached:1.2.1
 docker-java-api:3.0.14
-github-api:1.95
 blueocean-pipeline-editor:1.21.0
 pipeline-github-lib:1.0
 github-branch-source:2.5.8
@@ -99,7 +97,6 @@ resource-disposer:0.14
 workflow-cps:2.76
 credentials-binding:1.20
 cloudbees-folder:6.9
-mercurial:2.8
 blueocean-bitbucket-pipeline:1.21.0
 mailer:1.29
 workflow-aggregator:2.6
