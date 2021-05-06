@@ -1,4 +1,5 @@
 pipeline {
+  
  agent any
 
  environment {
@@ -32,8 +33,7 @@ pipeline {
     }
    }
    steps {
-    sh 'ls -l' 
-    sh 'pwd' 
+    sh 'ls -l'
     sh 'yarn'
     sh 'CI=true yarn test'
    }
@@ -42,23 +42,17 @@ pipeline {
   stage('Build Image') {
    steps {
     echo '--- Building image ---'
-    sh 'ls -l'
-    sh 'pwd' 
     sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
    }
   }
 
-  stage('Push Image') {
-   stages {
-    stage('Publish Image') {
-     steps {
+  stage('Publish Image') {
+    steps {
       echo '--- Publishing image ---'
       withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL) {
-       sh "docker push ${PROJECT_IMAGE}:${GIT_COMMIT}"
+        sh "docker push ${PROJECT_IMAGE}:${GIT_COMMIT}"
       }
-     }
     }
-   }
   }
  }
  
