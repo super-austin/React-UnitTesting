@@ -66,7 +66,7 @@ pipeline {
       sh 'rm -rf node_modules'
     }
     failure {
-      echo 'send email about broken build'
+      echo 'send warning about broken build'
     }
   }
 }
