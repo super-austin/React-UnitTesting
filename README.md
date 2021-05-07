@@ -19,19 +19,31 @@ login to Jenkins at <http://localhost:8080>
 
 ## Credentials
 
-- Add your Docker Hub credentials to Jenkins on page http://localhost:8080/credentials/store/system/ using id: `fd2-84f3-afc9a8a831fd`
+- Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
 
 ## Pipeline
 
-- Create pipeline using option pipeline from SCM use `https://github.com/nikola-bodrozic/react-jest-enzyme` as repo URL
+- Create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme` as repo URL
 - Run build and a new image will be in your Docker Hub repo
 
+## Pull image and run/stop container
+
+```shell
+docker run -d --name react-app -p 80:80 nikolabod/react-app:8084238
+```
+
+```shell
+docker container stop react-app
+```
+
 ## Versions Check
+
+### Docker
 
 Docker version 19.03.11-ol
 docker-compose version 1.25.5
 
-## Jenkins Plugins
+### Jenkins Plugins
 
  ace-editor: 1.1
  ant: 1.11
