@@ -3,8 +3,8 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_REGISTRY_CREDENTIALS = 'fd2-84f3-afc9a8a831fd'
-    DOCKER_REGISTRY_USERNAME = 'ce3d51cb45a2'
+    DOCKER_REGISTRY_CREDENTIALS = 'fc403e71-45cc-4962-a275-a2aad4d18e0b'
+    DOCKER_REGISTRY_USERNAME = 'nikolabod'
     DOCKER_REGISTRY = 'index.docker.io'
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
