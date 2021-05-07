@@ -60,7 +60,7 @@ pipeline {
 
   post {
     success {
-      echo 'image is created and pushed'
+      echo 'image is pushed'
     }
     always {
       sh 'rm -rf node_modules'
