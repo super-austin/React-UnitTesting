@@ -15,18 +15,19 @@ pipeline {
  }
 
  stages {
-  stage('Preparation') {
+  stage('Checkout from Git') {
    steps {
     sh "whoami"
-    sh "echo $PATH"
+    sh "$PATH"
     echo "--- Get latest git commit ---"
     script {
      GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
     }
+    echo "the commit is ${GIT_COMMIT}"
    }
   }
 
-  stage('Test') {
+  stage('Execute Tests') {
    agent {
     docker {
      image APP_IMAGE
@@ -34,7 +35,8 @@ pipeline {
    }
    steps {
     sh 'ls -l'
-    sh 'yarn'
+    sh 'yarn' 
+    echo "--- Execute Tests in CI mode ---"
     sh 'CI=true yarn test'
    }
   }
