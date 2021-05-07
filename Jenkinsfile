@@ -22,7 +22,7 @@ pipeline {
         echo "--- Get latest git commit ---"
         script {
           GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-          sh "the commit is ${GIT_COMMIT}"
+          echo "the commit is ${GIT_COMMIT}"
         }
       }
     }
