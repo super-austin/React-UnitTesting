@@ -34,8 +34,8 @@ pipeline {
         }
       }
       steps {
-        sh 'ls -l'
-        sh 'yarn'
+        echo "--- Install Dep. ---"
+        sh 'yarn install --network-timeout 3600000'
         echo "--- Execute Tests in CI mode ---"
         sh 'CI=true yarn test'
       }
