@@ -1,7 +1,7 @@
 FROM node:10 as build-deps
 WORKDIR /usr/src/app
 COPY package.json .
-RUN yarn
+RUN yarn install --network-timeout 3600000
 COPY . .
 RUN yarn build
 
