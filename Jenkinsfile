@@ -15,6 +15,7 @@ pipeline {
   }
 
   stages {
+  
     stage('Checkout from Git') {
       steps {
         sh "whoami"
@@ -26,7 +27,23 @@ pipeline {
         }
       }
     }
-
+    
+    stage('Lint') {
+      agent {
+        docker {
+          image APP_IMAGE
+        }
+      }
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        echo "--- Starting Lint ---"
+        sh """
+        yarn install --network-timeout 3600000
+        yarn lint
+        """
+      }
+    }
+    
     stage('Execute Tests') {
       agent {
         docker {
@@ -34,10 +51,11 @@ pipeline {
         }
       }
       steps {
-        echo "--- Install Dep. ---"
-        sh 'yarn install --network-timeout 3600000'
-        echo "--- Execute Tests in CI mode ---"
-        sh 'CI=true yarn test'
+        echo "--- Install Dep. & Test---"
+        sh """
+        sh yarn install --network-timeout 3600000
+        sh CI=true yarn test
+        """
       }
     }
 
@@ -63,7 +81,7 @@ pipeline {
       echo 'image is pushed'
     }
     always {
-      sh 'rm -rf node_modules'
+      deleteDir()
     }
     failure {
       echo 'send warning about broken build'
