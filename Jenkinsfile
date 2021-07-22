@@ -37,8 +37,8 @@ pipeline {
       steps {
         echo "--- Install Dep. & Test---"
         sh """
-        sh yarn install --network-timeout 3600000
-        sh CI=true yarn test
+        yarn install --network-timeout 3600000
+        CI=true yarn test
         """
       }
     }
