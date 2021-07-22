@@ -32,7 +32,6 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.7.1",
-    "lint": "0.7.0"
+    "enzyme-adapter-react-16": "^1.7.1"
   }
 }

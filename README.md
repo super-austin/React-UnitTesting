@@ -1,21 +1,10 @@
 # Jenkins & ReactJS
 
 This project shows how to:
-- pull image
-- lint
+- checkout repo
 - run tests
 - create a prod. image
 - push it to remote docker image repo
-
-## Credentials
-
-Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
-
-## Add Docker plugins
-
-- Docker
-- Docker Commons
-- Docker Pipeline 
 
 ## Jenkins Setup
 
@@ -28,6 +17,17 @@ docker run --rm -u root -p 8080:8080 \
 
 login to Jenkins at <http://localhost:8080>
 
+## Add Docker plugins
+
+- Docker
+- Docker Commons
+- Docker Pipeline 
+
+## Credentials
+
+Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
+
+
 ## Pipeline
 
 - Create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme` as repo URL
@@ -36,17 +36,10 @@ login to Jenkins at <http://localhost:8080>
 ## Pull image and run/stop container
 
 ```shell
-docker run -d --name react-app -p 80:80 nikolabod/react-app:d01d440
+docker run -d --name react-app -p 80:80 nikolabod/react-app:YOUR-TAG
 ```
 
 ```shell
 docker container stop react-app
 ```
-
-## Versions Check
-
-### Docker
-
-Docker version 19.03.11-ol
-docker-compose version 1.25.5
 

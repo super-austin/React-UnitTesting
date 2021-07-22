@@ -28,22 +28,6 @@ pipeline {
       }
     }
     
-    stage('Lint') {
-      agent {
-        docker {
-          image APP_IMAGE
-        }
-      }
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo "--- Starting Lint ---"
-        sh """
-        yarn install --network-timeout 3600000
-        yarn lint
-        """
-      }
-    }
-    
     stage('Execute Tests') {
       agent {
         docker {
