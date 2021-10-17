@@ -17,11 +17,20 @@ docker run --rm -u root -p 8080:8080 \
 
 login to Jenkins at <http://localhost:8080>
 
-## Add Docker plugins
+## SonarQube Setup
+
+```shell
+docker-compose up
+```
+
+login to SonarQube at <http://localhost:9000> admin/admin
+
+## Add plugins
 
 - Docker
 - Docker Commons
-- Docker Pipeline 
+- Docker Pipeline
+- SonarQube Scanner
 
 ## Credentials
 

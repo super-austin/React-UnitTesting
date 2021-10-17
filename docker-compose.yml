@@ -1,0 +1,17 @@
+version: "3"
+services:
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonar
+    restart: always
+    environment:
+      - SONARQUBE_JDBC_USERNAME=admin
+      - SONARQUBE_JDBC_PASSWORD=secret
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+    volumes:
+      - '.\sonar\conf:/opt/sonarqube/conf'
+      - '.\sonar\data:/opt/sonarqube/data'
+      - '.\sonar\extensions:/opt/sonarqube/extensions'
+      - '.\sonar\bundled-plugins:/opt/sonarqube/lib/bundled-plugins'
