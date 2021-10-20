@@ -12,34 +12,24 @@ This project shows how to:
 docker run --rm -u root -p 8080:8080 \
     -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v "$HOME":/home jenkinsci/blueocean:1.24.6
+    -v "$HOME":/home jenkinsci/blueocean:latest
 ```
 
 login to Jenkins at <http://localhost:8080>
 
-## SonarQube Setup
-
-```shell
-docker-compose up
-```
-
-login to SonarQube at <http://localhost:9000> admin/admin
-
-## Add plugins
+## Add Docker plugins
 
 - Docker
 - Docker Commons
-- Docker Pipeline
-- SonarQube Scanner
+- Docker Pipeline 
 
 ## Credentials
 
 Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
 
-
 ## Pipeline
 
-- Create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme` as repo URL
+- Create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme.git` as repo URL
 - Run build and a new image will be in your Docker Hub repo
 
 ## Pull image and run/stop container
