@@ -32,6 +32,33 @@ Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/creden
 - Create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme.git` as repo URL
 - Run build and a new image will be in your Docker Hub repo
 
+
+## SonarQube & Jenkins
+
+- stop all jenkins containers running on 8080
+- make sure you installed plugin **SonarQube Scanner for Jenkins** on <http://localhost:8080/pluginManager/installed>
+- make sure you set up **SonarQube Scanner** <http://localhost:8080/configureTools/>
+- set pipeline script <http://localhost:8080/job/react/configure>
+```shell
+node {
+  stage('Clone the Git') {
+    git 'https://github.com/nikola-bodrozic/react-jest-enzyme.git'
+  }
+  stage('SonarQube analysis') {
+    sh 'ls -lA'
+    def scannerHome = tool 'sonarqube';
+    withSonarQubeEnv('sonarqube') {
+      sh "${scannerHome}/bin/sonar-scanner \
+      -D sonar.login=YOUR-SONARQUBE-TOKEN \
+      -D sonar.projectKey=react \
+      -D sonar.host.url=http://sonarqube:9000/"
+    }
+  }
+}
+```
+- `docker-compose up`
+- execute build and review results on <http://localhost:9000/project/issues?id=react>
+
 ## Pull image and run/stop container
 
 ```shell
