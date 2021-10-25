@@ -1,14 +1,11 @@
-version: '3'
+version: '2'
 
 services:
 
   jenkins:
     image: jenkins/jenkins:lts
-    privileged: true
     volumes:
-      - jenkins_data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
+       - sonarqube_jenkins_data:/var/jenkins_home
     networks:
       - sonarnet
     ports:
@@ -26,6 +23,21 @@ services:
       - sonarnet
     ports:
       - '9000:9000'
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
+
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
 
 networks:
   sonarnet:
@@ -36,5 +48,7 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_bundled-plugins:
-  jenkins_data:
+  postgresql:
+  postgresql_data:
+  sonarqube_jenkins_data:
 
