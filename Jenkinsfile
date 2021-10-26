@@ -3,7 +3,6 @@ pipeline {
   agent any
 
   environment {
-    SONARQUBE_TOKEN = 'b4713b89-67b1-46b6-a792-4d95ffab1cda'
     DOCKER_REGISTRY_CREDENTIALS = 'fc403e71-45cc-4962-a275-a2aad4d18e0b'
     DOCKER_REGISTRY_USERNAME = 'nikolabod'
     DOCKER_REGISTRY = 'index.docker.io'
@@ -31,7 +30,6 @@ pipeline {
       steps {
         script {
           def scannerHome = tool 'SonarQube';
-          sh "${SONARQUBE_TOKEN}"
           withSonarQubeEnv('SonarQube') {
             sh "${scannerHome}/bin/sonar-scanner \
                   -D sonar.login=ca47acd6296d7723cbac4421fbcc016bd0384d53 \
