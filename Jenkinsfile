@@ -31,9 +31,9 @@ pipeline {
       steps {
         script {
           def scannerHome = tool 'SonarQube';
-          withSonarQubeEnv('SonarQube', envOnly: true) {
+          withSonarQubeEnv('SonarQube') {
             sh "${scannerHome}/bin/sonar-scanner \
-                  -D sonar.login=${env.SONARQUBE_TOKEN} \
+                  -D sonar.login=$SONARQUBE_TOKEN \
                   -D sonar.projectKey=react \
                   -D sonar.host.url=http://sonarqube:9000/"
           }
