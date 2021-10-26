@@ -3,6 +3,7 @@ pipeline {
   agent any
 
   environment {
+    SONARQUBE_TOKEN = 'b4713b89-67b1-46b6-a792-4d95ffab1cda'
     DOCKER_REGISTRY_CREDENTIALS = 'fc403e71-45cc-4962-a275-a2aad4d18e0b'
     DOCKER_REGISTRY_USERNAME = 'nikolabod'
     DOCKER_REGISTRY = 'index.docker.io'
@@ -19,7 +20,6 @@ pipeline {
     stage('Checkout from Git') {
       steps {
         sh "whoami"
-        sh "echo $PATH"
         script {
           GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
           echo "the commit is ${GIT_COMMIT}"
@@ -30,13 +30,13 @@ pipeline {
     stage('SonarQube analysis') {
       steps {
         script {
-        def scannerHome = tool 'SonarQube';
-        withSonarQubeEnv('SonarQube') {
-          sh "${scannerHome}/bin/sonar-scanner \
-        -D sonar.login=ca47acd6296d7723cbac4421fbcc016bd0384d53 \
-        -D sonar.projectKey=react \
-        -D sonar.host.url=http://sonarqube:9000/"
-        }
+          def scannerHome = tool 'SonarQube';
+          withSonarQubeEnv('SonarQube') {
+            sh "${scannerHome}/bin/sonar-scanner \
+                  -D sonar.login=${SONARQUBE_TOKEN} \
+                  -D sonar.projectKey=react \
+                  -D sonar.host.url=http://sonarqube:9000/"
+          }
         }
       }
     }
@@ -48,7 +48,6 @@ pipeline {
         }
       }
       steps {
-        echo "--- Install Dep. & Test---"
         sh """
         yarn install --network-timeout 3600000
         CI=true yarn test
@@ -58,14 +57,12 @@ pipeline {
 
     stage('Build Image') {
       steps {
-        echo '--- Building image ---'
         sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
       }
     }
 
     stage('Publish Image') {
       steps {
-        echo '--- Publishing image ---'
         withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: DOCKER_REGISTRY_URL) {
           sh "docker push ${PROJECT_IMAGE}:${GIT_COMMIT}"
         }
