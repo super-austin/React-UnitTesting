@@ -27,6 +27,17 @@ pipeline {
       }
     }
     
+    stage('SonarQube analysis') {
+      sh 'ls -lA'
+      def scannerHome = tool 'SonarQube';
+      withSonarQubeEnv('SonarQube') {
+        sh "${scannerHome}/bin/sonar-scanner \
+        -D sonar.login=ca47acd6296d7723cbac4421fbcc016bd0384d53 \
+        -D sonar.projectKey=react \
+        -D sonar.host.url=http://sonarqube:9000/"
+      }
+    }
+  
     stage('Execute Tests') {
       agent {
         docker {
