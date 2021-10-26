@@ -43,6 +43,7 @@ Plugins on <http://localhost:8080/pluginManager/installed>
 ## Credentials
 
 Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
+Configure SonarQube server <http://localhost:8080/configure>
 
 ## Pipeline
 
