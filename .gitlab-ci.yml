@@ -1,0 +1,42 @@
+stages:
+  - build
+  - test
+  - push
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
+image:
+  name: node:16-alpine
+
+build_r:
+  stage: build
+  before_script:
+    - export ENV_VAR="value"
+  script:
+    - node -v
+    - echo "$ENV_VAR"
+    - echo "$CI_COMMIT_REF_SLUG"
+    - npm install
+  only:
+    - main
+
+test_r:
+  stage: test
+  script:
+    - echo "$CI_COMMIT_REF_SLUG"
+    - CI=true npm test
+  only:
+    - main
+
+push_r:
+  stage: push
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --cache=false --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile-prod --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA 
+  only:
+    - main
