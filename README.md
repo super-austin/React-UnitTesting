@@ -1,8 +1,8 @@
 # Jenkins, SonarQube & ReactJS
 
 This project shows how to:
-- checkout repo
-- run tests
+
+- run tests in pipeline
 - run SonarQube Scanner
 - create a prod. image
 - push it to remote docker image repo
