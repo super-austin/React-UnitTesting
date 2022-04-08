@@ -9,7 +9,7 @@ pipeline {
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    APP_IMAGE = "node:10"
+    APP_IMAGE = "node:16"
 
     GIT_COMMIT = ' '
   }
@@ -55,7 +55,7 @@ pipeline {
 
     stage('Build Image') {
       steps {
-        sh "docker build -t ${PROJECT_IMAGE}:${GIT_COMMIT} ."
+        sh "docker build -t nikolabod/react-app:${GIT_COMMIT} ."
       }
     }
 
