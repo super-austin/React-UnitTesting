@@ -1,4 +1,4 @@
-# Jenkins, SonarQube & ReactJS
+# Jenkins, SonarQube & React
 
 This project shows how to:
 
@@ -7,14 +7,14 @@ This project shows how to:
 - create a prod. image
 - push it to remote docker image repo
 
-## Docker stack setup
+## Start Docker stack with SonarQube
 
 ```shell
 docker-compose up
 ```
 ## SonarQube setup
 
-Create project called react and save the token for that project. You'll use the token in Jenkinsfile.
+Create project called react and save the token for that project. You'll use the token in Jenkins secrets.
 
 ## Jenkins Setup
 
@@ -40,31 +40,33 @@ Beside default plugins add:
 
 Plugins on <http://localhost:8080/pluginManager/installed>
 
-## Credentials
+## Add Credentials in Jenkins
 
-Add your Docker Hub credentials to Jenkins on page <http://localhost:8080/credentials/store/system/> and put id in Jenkinsfile
-Configure SonarQube server <http://localhost:8080/configure>
+In <http://localhost:8080/credentials/store/system/domain/_/> add credentials for:
+
+- Docker Hub credentials and put id from Jenkinsfile
+- your SonarQube token
 
 ## Pipeline
 
 - make sure you set up **SonarQube Scanner** <http://localhost:8080/configureTools/>
+- Configure SonarQube server <http://localhost:8080/configure>
 - create pipeline using option pipeline from SCM and use `https://github.com/nikola-bodrozic/react-jest-enzyme.git` as repo URL
 - run build and a new image will be in your Docker Hub repo also report from SonarQube Scanner is on <http://localhost:9000/project/issues?id=react>
 
 ## Clean up
 
 ```shell
-docker container stop jenkins
-docker-compose down
+docker container stop jenkins && docker-compose down
 ```
 
 ## Pull image and run/stop container
 
 ```shell
-docker run -d --name react-app -p 80:80 nikolabod/react-app:YOUR-TAG
+docker run -d --name react-app -p 80:80 nikolabod/react-app:7161bc4
 ```
 
 ```shell
-docker container stop react-app
+docker container rm -f react-app
 ```
 
