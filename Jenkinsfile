@@ -9,7 +9,7 @@ pipeline {
     DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}/v1/"
     PROJECT_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_REGISTRY_USERNAME}/react-app"
 
-    APP_IMAGE = "node:16"
+    APP_IMAGE = "node:16-alpine"
 
     GIT_COMMIT = ' '
   }
