@@ -19,7 +19,7 @@ services:
       - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
 
   db:
-    image: postgres
+    image: postgres:13.2-alpine
     networks:
       - sonarnet
     environment:

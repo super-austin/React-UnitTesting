@@ -24,7 +24,7 @@ docker run --rm --name jenkins \
     -u root -p 8080:8080 \
     -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v "$HOME":/home jenkinsci/blueocean:latest
+    -v "$HOME":/home jenkinsci/blueocean:1.24.6
 ```
 
 login to Jenkins at <http://localhost:8080>
@@ -63,7 +63,7 @@ docker container stop jenkins && docker-compose down
 ## Pull image and run/stop container
 
 ```shell
-docker run -d --name react-app -p 80:80 nikolabod/react-app:7161bc4
+docker run -d --name react-app -p 80:80 nikolabod/react-app:YOUR-COMMIT
 ```
 
 ```shell
